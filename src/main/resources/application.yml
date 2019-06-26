@@ -1,1 +1,9 @@
 
+barefoot:
+  postgis:
+    host: postgis
+    port: 5432
+    database: someDatabase
+    table: someTable
+    user: username
+    pass: password
