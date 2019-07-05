@@ -1,4 +1,4 @@
-package org.envirocar.processing.mapmatching.models
+package org.envirocar.processing.mapmatching.models.mapmatching
 
 import org.locationtech.jts.geom.Point
 import java.util.*

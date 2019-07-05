@@ -1,4 +1,4 @@
-package org.envirocar.processing.mapmatching.models
+package org.envirocar.processing.mapmatching.models.mapmatching
 
 import com.esri.core.geometry.Geometry
 
