@@ -1,6 +1,9 @@
 version: '3'
 services: 
   mapserver:
+    build:
+      context: ./mapserver
+      dockerfile: ./Dockerfile
     image: envirocar/mapserver
     ports: 
       - 5432:5432
@@ -12,3 +15,5 @@ services:
     image: envirocar/mapmatching-service
     ports:
       - 8080:8080
+    depends_on:
+      - mapserver
