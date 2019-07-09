@@ -17,4 +17,6 @@ COPY --from=BUILD /usr/src/app/target/mapmatching-${SERVER_VERSION}.jar /usr/src
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD wget http://localhost:8080/actuator/health -q -0 - > /dev/null 2>&1
 
-EXPOSE 8080 
+EXPOSE 8080
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/src/app/app.jar"]
