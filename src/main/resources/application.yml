@@ -1,9 +1,21 @@
+spring:
+  application:
+    name: MapMatching
 
 barefoot:
   postgis:
-    host: postgis
+    host: localhost
     port: 5432
-    database: someDatabase
-    table: someTable
-    user: username
-    pass: password
+    database: postgres
+    table: bfmap_ways
+    user: postgres
+    pass: postgres
+
+  matcher:
+    sigma: 45
+    lambda: 0.1
+    maxradius: 75
+    maxdistance: 1000
+    mindistance: 20
+    mininterval: 5000
+    costfunction: distance
