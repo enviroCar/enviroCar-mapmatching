@@ -17,7 +17,16 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<kotlin.version>1.2.71</kotlin.version>
+        <jts.version>1.16.1</jts.version>
+        <barefoot.version>0.1.5</barefoot.version>
 	</properties>
+
+	<licenses>
+		<license>
+			<name>AGPLv3</name>
+			<url>http://www.gnu.org/licenses/agpl-3.0.html</url>
+		</license>
+	</licenses>
 
 	<repositories>
 		<repository>
@@ -48,43 +57,20 @@
 		<dependency>
 			<groupId>com.github.bmwcarit</groupId>
 			<artifactId>barefoot</artifactId>
-			<version>0.1.5</version>
+			<version>${barefoot.version}</version>
 		</dependency>
 
 		<!-- JTS -->
 		<dependency>
 			<groupId>org.locationtech.jts</groupId>
 			<artifactId>jts-core</artifactId>
-			<version>1.16.1</version>
+			<version>${jts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.locationtech.jts</groupId>
 			<artifactId>jts-io</artifactId>
-			<version>1.16.1</version>
+			<version>${jts.version}</version>
 			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>com.bedatadriven</groupId>
-			<artifactId>jackson-datatype-jts</artifactId>
-			<version>2.4</version>
-		</dependency>
-
-		<!-- moshi -->
-		<dependency>
-			<groupId>com.squareup.moshi</groupId>
-			<artifactId>moshi-kotlin</artifactId>
-			<version>1.8.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.moshi</groupId>
-			<artifactId>moshi-kotlin-codegen</artifactId>
-			<version>1.8.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.squareup.moshi</groupId>
-			<artifactId>moshi-adapters</artifactId>
-			<version>1.8.0</version>
 		</dependency>
 
 		<!-- Testing Dependencies -->
@@ -122,8 +108,27 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+                <version>3.0</version>
+				<inherited>false</inherited>
+				<configuration>
+					<aggregate>true</aggregate>
+					<header>etc/license-header.txt</header>
+					<includes>
+						<include>**/*.kt</include>
+					</includes>
+					<strictCheck>true</strictCheck>
+					<properties>
+						<author>The enviroCar project</author>
+						<year>2013-2019</year>
+					</properties>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
