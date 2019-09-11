@@ -21,6 +21,7 @@ import org.locationtech.jts.geom.Point
 
 data class MatchedPoint(
         val osmId: Long,
+        val measurementId: String,
         val streetName: String,
         val unmatchedPoint: Point,
         val pointOnRoad: Point

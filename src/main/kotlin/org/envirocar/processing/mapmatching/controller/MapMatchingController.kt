@@ -17,11 +17,13 @@
  */
 package org.envirocar.processing.mapmatching.controller
 
+import com.bmwcarit.barefoot.roadmap.RoadMap
 import org.envirocar.processing.mapmatching.models.json.TrackJson
 import org.envirocar.processing.mapmatching.models.mapmatching.MapMatchingCandidate
 import org.envirocar.processing.mapmatching.models.mapmatching.MapMatchingInput
 import org.envirocar.processing.mapmatching.models.mapmatching.MapMatchingResult
 import org.envirocar.processing.mapmatching.service.BarefootMapMatcher
+import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -55,9 +57,25 @@ class MapMatchingController(
         val input = MapMatchingInput(candidates)
         val result: MapMatchingResult = mapmatcher.computeMapMatching(input)
 
-        return ResponseEntity.ok(result.matchedRoute)
+        return ResponseEntity.ok(result)
+    }
+
+    @RequestMapping(value = "/mapmatchingraw", method = [RequestMethod.POST])
+    fun doMapMatchingSimple(@RequestBody track: TrackJson): ResponseEntity<Any> {
+        val candidates = track.measurements.stream()
+                .map {
+                    MapMatchingCandidate(
+                            it.id,
+                            it.time.toDate(),
+                            it.point,
+                            it.phenomenons.find { it.name == KEY_GPS_ACCURACY }.takeIf { it != null }!!.value)
+                }.toList()
+
+        val input = MapMatchingInput(candidates)
+        val result: String = mapmatcher.computeSimpleMapMatching(input)
+
+        return ResponseEntity.ok(result)
     }
 
     private fun LocalDateTime.toDate() = Date.from(this.atZone(ZoneId.systemDefault()).toInstant())
-
 }

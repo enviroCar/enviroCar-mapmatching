@@ -19,8 +19,8 @@ package org.envirocar.processing.mapmatching.config
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import org.envirocar.processing.mapmatching.serde.EnviroCarJSONModule
-import org.envirocar.processing.mapmatching.serde.JtsToGeoJSONModule
+import org.envirocar.processing.mapmatching.models.serde.EnviroCarJSONModule
+import org.envirocar.processing.mapmatching.models.serde.JtsToGeoJSONModule
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary

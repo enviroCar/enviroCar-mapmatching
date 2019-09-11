@@ -5,7 +5,7 @@ spring:
 barefoot:
   postgis:
     host: localhost
-    port: 5432
+    port: 5433
     database: postgres
     table: bfmap_ways
     user: postgres
@@ -13,9 +13,9 @@ barefoot:
 
   matcher:
     sigma: 45
-    lambda: 0.1
+    lambda: 0.0
     maxradius: 75
     maxdistance: 1000
-    mindistance: 20
+    mindistance: 0
     mininterval: 5000
     costfunction: distance
