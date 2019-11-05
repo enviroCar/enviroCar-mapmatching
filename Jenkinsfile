@@ -6,7 +6,7 @@ node {
   }
 
   stage('Build image') {
-    app = docker.build("ec-components/mapmatching", "-f docker/service/Dockerfile .")
+    app = docker.build("envirocar/mapmatching", "-f docker/service/Dockerfile .")
   }
 
   stage('Push image') {
