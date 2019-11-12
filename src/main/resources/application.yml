@@ -17,5 +17,5 @@ barefoot:
     maxradius: 75
     maxdistance: 1000
     mindistance: 0
-    mininterval: 900
+    mininterval: 0
     costfunction: distance
