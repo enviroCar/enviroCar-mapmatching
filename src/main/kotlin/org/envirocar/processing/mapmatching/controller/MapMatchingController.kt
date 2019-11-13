@@ -45,19 +45,23 @@ class MapMatchingController(
 
     @RequestMapping(value = "/mapmatching", method = [RequestMethod.POST])
     fun doMapMatching(@RequestBody track: TrackJson): ResponseEntity<Any> {
-        val candidates = track.measurements.stream()
-                .map {
-                    MapMatchingCandidate(
-                            it.id,
-                            it.time.toDate(),
-                            it.point,
-                            it.phenomenons.find { it.name == KEY_GPS_ACCURACY }.takeIf { it != null }!!.value)
-                }.toList()
+        try {
+            val candidates = track.measurements.stream()
+                    .map {
+                        MapMatchingCandidate(
+                                it.id,
+                                it.time.toDate(),
+                                it.point,
+                                it.phenomenons.find { it.name == KEY_GPS_ACCURACY }.takeIf { it != null }!!.value)
+                    }.toList()
 
-        val input = MapMatchingInput(candidates)
-        val result: MapMatchingResult = mapmatcher.computeMapMatching(input)
-
-        return ResponseEntity.ok(result)
+            val input = MapMatchingInput(candidates)
+            val result: MapMatchingResult = mapmatcher.computeMapMatching(input)
+            return ResponseEntity.ok(result)
+        } catch (e: Exception){
+            e.printStackTrace()
+            throw e
+        }
     }
 
     @RequestMapping(value = "/mapmatchingraw", method = [RequestMethod.POST])

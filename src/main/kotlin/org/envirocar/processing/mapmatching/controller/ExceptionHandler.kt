@@ -20,6 +20,8 @@ package org.envirocar.processing.mapmatching.controller
 import org.envirocar.processing.mapmatching.exceptions.InvalidInputException
 import org.envirocar.processing.mapmatching.exceptions.OutOfSuppertedAreaException
 import org.envirocar.processing.mapmatching.models.ErrorType
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -33,17 +35,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @RestController
 class ExceptionHandler : ResponseEntityExceptionHandler() {
+    private val LOG: Logger = LoggerFactory.getLogger(javaClass)
 
     @ExceptionHandler(InvalidInputException::class)
-    fun invalidInput(ex: InvalidInputException) =
-            ResponseEntity(ErrorType(HttpStatus.BAD_REQUEST.value(), ex.message, ex.toString()), HttpStatus.BAD_REQUEST)
+    fun invalidInput(ex: InvalidInputException) = {
+        LOG.error(ex.message, ex)
+        ResponseEntity(ErrorType(HttpStatus.BAD_REQUEST.value(), ex.message, ex.toString()), HttpStatus.BAD_REQUEST)
+    }
+
 
     @ExceptionHandler(OutOfSuppertedAreaException::class)
-    fun outOfSupportedArea(ex: OutOfSuppertedAreaException) =
-            ResponseEntity(ErrorType(HttpStatus.BAD_REQUEST.value(), ex.message, ex.toString()), HttpStatus.BAD_REQUEST)
+    fun outOfSupportedArea(ex: OutOfSuppertedAreaException) = {
+        LOG.error(ex.message, ex)
+        ResponseEntity(ErrorType(HttpStatus.BAD_REQUEST.value(), ex.message, ex.toString()), HttpStatus.BAD_REQUEST)
+    }
 
     @ExceptionHandler(Exception::class)
-    fun genericException(ex: Exception) =
-            ResponseEntity(ErrorType(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.message, ex.toString()), HttpStatus.INTERNAL_SERVER_ERROR)
+    fun genericException(ex: Exception) = {
+        LOG.error(ex.message, ex)
+        ResponseEntity(ErrorType(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.message, ex.toString()), HttpStatus.INTERNAL_SERVER_ERROR)
+    }
 
 }
