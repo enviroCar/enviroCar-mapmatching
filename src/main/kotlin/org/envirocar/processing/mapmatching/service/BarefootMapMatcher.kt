@@ -75,6 +75,7 @@ class BarefootMapMatcher(
                     }
 
                     MatchedPoint(
+                            id = it.first.point().edge().base().id(),
                             osmId = it.first.point().edge().base().refid(),
                             measurementId = it.second.id(),
                             streetName = "",

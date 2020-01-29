@@ -20,6 +20,7 @@ package org.envirocar.processing.mapmatching.models.mapmatching
 import org.locationtech.jts.geom.Point
 
 data class MatchedPoint(
+        val id: Long,
         val osmId: Long,
         val measurementId: String,
         val streetName: String,

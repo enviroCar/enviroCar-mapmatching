@@ -43,7 +43,6 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         ResponseEntity(ErrorType(HttpStatus.BAD_REQUEST.value(), ex.message, ex.toString()), HttpStatus.BAD_REQUEST)
     }
 
-
     @ExceptionHandler(OutOfSuppertedAreaException::class)
     fun outOfSupportedArea(ex: OutOfSuppertedAreaException) = {
         LOG.error(ex.message, ex)
