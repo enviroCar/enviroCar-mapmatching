@@ -52,7 +52,8 @@ class MapMatchingController(
                                 it.id,
                                 it.time.toDate(),
                                 it.point,
-                                it.phenomenons.find { it.name == KEY_GPS_ACCURACY }.takeIf { it != null }!!.value)
+                                50.0) 
+                            //it.phenomenons.find { it.name == KEY_GPS_ACCURACY }.takeIf { it != null }!!.value)
                     }.toList()
 
             val input = MapMatchingInput(candidates)
